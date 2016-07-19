@@ -23,16 +23,14 @@ SOFTWARE.
 */
 
 (function (global) {
-  var silentAuth = true;
-
   /**
    * Google API authorize
    * @param {Boolean} [noImmediateAuth]
    * @return {Object} Promise
    */
   var authorize = function () {
-    var immediate = silentAuth;
-    silentAuth = true;
+    var immediate = GDriveAppData.config.silentAuth;
+    GDriveAppData.config.silentAuth = true;
     return gapi.auth.authorize({
       client_id: GDriveAppData.config.clientId,
       scope: GDriveAppData.config.scope,
@@ -42,8 +40,8 @@ SOFTWARE.
         throw 'authFailed';
       }
     }, function () {
-      if (silentAuth) {
-        silentAuth = false;
+      if (GDriveAppData.config.silentAuth) {
+        GDriveAppData.config.silentAuth = false;
         throw 'silentAuthFailed';
       }
     });
@@ -104,6 +102,7 @@ SOFTWARE.
      */
     config: {
       appDataFileName: 'my-app-data.json',
+      silentAuth: true,
       clientId: null,
       scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata'
     },
