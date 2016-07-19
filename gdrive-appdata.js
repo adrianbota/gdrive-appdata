@@ -23,22 +23,29 @@ SOFTWARE.
 */
 
 (function (global) {
+  var silentAuth = true;
+
   /**
    * Google API authorize
    * @param {Boolean} [noImmediateAuth]
    * @return {Object} Promise
    */
-  var authorize = function (noImmediateAuth) {
+  var authorize = function () {
+    var immediate = silentAuth;
+    silentAuth = true;
     return gapi.auth.authorize({
       client_id: GDriveAppData.config.clientId,
       scope: GDriveAppData.config.scope,
-      immediate: !noImmediateAuth
+      immediate: immediate
     }).then(function () {
       if (!gapi.auth.getToken()) {
         throw 'authFailed';
       }
     }, function () {
-      return authorize(true);
+      if (silentAuth) {
+        silentAuth = false;
+        throw 'silentAuthFailed';
+      }
     });
   };
 
