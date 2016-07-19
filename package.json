@@ -1,0 +1,25 @@
+{
+  "name": "gdrive-appdata",
+  "version": "1.0.0",
+  "description": "Javascript utility to store application data to Google Drive",
+  "main": "gdrive-appdata.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianbota/gdrive-appdata.git"
+  },
+  "keywords": [
+    "google",
+    "drive",
+    "app",
+    "data"
+  ],
+  "author": "Adrian Bota",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrianbota/gdrive-appdata/issues"
+  },
+  "homepage": "https://github.com/adrianbota/gdrive-appdata#readme"
+}
