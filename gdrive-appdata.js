@@ -37,36 +37,32 @@ SOFTWARE.
       if (!gapi.auth.getToken()) {
         throw 'authFailed';
       }
-    }, function (reason) {
-      return reason;
+    }, function () {
+      return authorize(true);
     });
   };
 
   /**
    * Load Google Drive API
-   * @param {Boolean} [noImmediateAuth]
    * @return {Object} Promise
    */
-  var loadDriveAPI = function (noImmediateAuth) {
-    return authorize(noImmediateAuth).then(function () {
+  var loadDriveAPI = function () {
+    return authorize().then(function () {
       return gapi.client.load('drive', 'v3');
     }).then(function () {
       if (!gapi.client.drive) {
         throw 'driveAPILoadFailed';
       }
-    }, function (reason) {
-      return reason;
     });
   };
 
   /**
    * Get the id of the app data file, if it exists
    * or create it, if it doesn't exist
-   * @param {Boolean} [noImmediateAuth]
    * @return {Object} Promise
    */
-  var getAppDataFileId = function (noImmediateAuth) {
-    return loadDriveAPI(noImmediateAuth).then(function () {
+  var getAppDataFileId = function () {
+    return loadDriveAPI().then(function () {
       return gapi.client.drive.files.list({
         q: 'name="' + GDriveAppData.config.appDataFileName + '"',
         spaces: 'appDataFolder',
@@ -107,20 +103,15 @@ SOFTWARE.
 
     /**
      * Load app data
-     * @param {Boolean} [noImmediateAuth]
      * @return {Object} Promise
      */
-    loadAppData: function (noImmediateAuth) {
-      return getAppDataFileId(noImmediateAuth).then(function (fileId) {
+    loadAppData: function () {
+      return getAppDataFileId().then(function (fileId) {
         return gapi.client.drive.files.get({
           fileId: fileId,
           alt: 'media'
         }).then(function (response) {
           return response.result;
-        }, function () {
-          if (!noImmediateAuth) {
-            return GDriveAppData.loadAppData(true);
-          }
         });
       });
     },
@@ -129,11 +120,10 @@ SOFTWARE.
      * Get the id of the app data file, if it exists
      * or create it, if it doesn't exist
      * @param {Object} appData Application data
-     * @param {Boolean} [noImmediateAuth]
      * @return {Object} Promise
      */
-    saveAppData: function (appData, noImmediateAuth) {
-      return getAppDataFileId(noImmediateAuth).then(function (fileId) {
+    saveAppData: function (appData) {
+      return getAppDataFileId().then(function (fileId) {
         return gapi.client.request({
           path: '/upload/drive/v3/files/' + fileId,
           method: 'PATCH',
@@ -141,10 +131,6 @@ SOFTWARE.
             uploadType: 'media'
           },
           body: JSON.stringify(appData)
-        }, function () {
-          if (!noImmediateAuth) {
-            return GDriveAppData.saveAppData(appData, true);
-          }
         });
       });
     }
