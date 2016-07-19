@@ -98,7 +98,7 @@ SOFTWARE.
     config: {
       appDataFileName: 'my-app-data.json',
       clientId: null,
-      scope: 'https://www.googleapis.com/auth/drive'
+      scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata'
     },
 
     /**
