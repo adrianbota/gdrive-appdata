@@ -37,6 +37,8 @@ SOFTWARE.
       if (!gapi.auth.getToken()) {
         throw 'authFailed';
       }
+    }, function (reason) {
+      return reason;
     });
   };
 
@@ -52,6 +54,8 @@ SOFTWARE.
       if (!gapi.client.drive) {
         throw 'driveAPILoadFailed';
       }
+    }, function (reason) {
+      return reason;
     });
   };
 

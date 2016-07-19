@@ -1,6 +1,6 @@
 {
   "name": "gdrive-appdata",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Javascript utility to store application data to Google Drive",
   "main": "gdrive-appdata.js",
   "scripts": {
