@@ -1,6 +1,6 @@
 describe('authorize', function () {
   var authorize = require('../src/authorize');
-  var lodashSet = require('../node_modules/lodash/set');
+  var lodashSet = require('lodash/set');
 
   beforeEach(function () {
     lodashSet(window, 'gapi.auth.authorize', jasmine.createSpy('authorize'));
