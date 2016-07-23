@@ -1,6 +1,6 @@
 describe('retrieveAppDataFileId', function () {
-  var defer = require('deferred');
-  var lodashSet = require('lodash/set');
+  var defer = require('../node_modules/deferred');
+  var lodashSet = require('../node_modules/lodash/set');
   var retrieveAppDataFileId = require('../src/retrieve-app-data-file-id');
 
   beforeEach(function () {

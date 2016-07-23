@@ -1,6 +1,6 @@
 describe('loadDriveAPI', function () {
   var loadDriveAPI = require('../src/load-drive-api');
-  var lodashSet = require('lodash/set');
+  var lodashSet = require('../node_modules/lodash/set');
 
   beforeEach(function () {
     lodashSet(window, 'gapi.client.load', jasmine.createSpy('load'));
