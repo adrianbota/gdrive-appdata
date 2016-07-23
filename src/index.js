@@ -8,14 +8,16 @@ var loadAppData = require('./load-app-data');
 var saveAppData = require('./save-app-data');
 
 var getFileId = function () {
-  return authorize(
-    api.config.clientId,
-    api.config.scopes,
-    api.config.immediateAuth
-  ).then(function () {
+  var clientId = api.config.clientId;
+  var scopes = api.config.scopes;
+  var immediateAuth = api.config.immediateAuth;
+
+  api.config.immediateAuth = true;
+
+  return authorize(clientId, scopes, immediateAuth).then(function () {
     return loadDriveAPI(api.config.driveVersion).then(function () {
-      return retrieveAppDataFileId(api.config.appDataFileName).then(function (id) {
-        return id || createAppDataFile(api.config.appDataFileName);
+      return retrieveAppDataFileId(api.config.appDataFileName).then(function (fileId) {
+        return (fileId || createAppDataFile(api.config.appDataFileName));
       })
     })
   });

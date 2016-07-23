@@ -1,6 +1,6 @@
 var lodashGet = require('lodash/get');
 
-var getData = function () {
+var getData = function (response) {
   return lodashGet(response, 'result', null);
 };
 
