@@ -1,0 +1,1 @@
+window.GDriveAppData = require('./index');

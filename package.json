@@ -1,10 +1,10 @@
 {
   "name": "gdrive-appdata",
-  "version": "1.0.6",
-  "description": "Javascript utility to store application data to Google Drive",
+  "version": "2.0.0",
+  "description": "Javascript utility to store application data to Google Drive app data folder",
   "main": "gdrive-appdata.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,14 @@
   },
   "homepage": "https://github.com/adrianbota/gdrive-appdata#readme",
   "devDependencies": {
+    "deferred": "^0.7.5",
     "gulp": "^3.9.1",
-    "gulp-minify": "0.0.12"
+    "gulp-jasmine-browser": "^1.4.0",
+    "gulp-util": "^3.0.7",
+    "phantomjs-prebuilt": "^2.1.7",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "index-template": "^1.0.1"
   }
 }

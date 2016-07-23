@@ -1,10 +1,22 @@
 var gulp = require('gulp');
-var minify = require('gulp-minify');
+var webpackStream = require('webpack-stream');
+var jasmineBrowser = require('gulp-jasmine-browser');
+var UglifyJsPlugin = webpackStream.webpack.optimize.UglifyJsPlugin;
 
-gulp.task('js', function () {
-  gulp.src('gdrive-appdata.js')
-    .pipe(minify())
-    .pipe(gulp.dest('.'));
+gulp.task('test', function () {
+  gulp.src('./spec/*-spec.js')
+    .pipe(webpackStream({ output: { filename: 'spec.js' } }))
+    .pipe(jasmineBrowser.specRunner({ console: true }))
+    .pipe(jasmineBrowser.headless());
 });
 
-gulp.task('build', ['js']);
+gulp.task('build', function () {
+  gulp.src('./src/gdrive-appdata.js')
+    .pipe(webpackStream({
+      output: { filename: 'gdrive-appdata.js' },
+      plugins: [new UglifyJsPlugin({ minimize: true })]
+    }))
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('default', ['test', 'build']);
