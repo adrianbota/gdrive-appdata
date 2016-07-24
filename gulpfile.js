@@ -4,14 +4,14 @@ var jasmineBrowser = require('gulp-jasmine-browser');
 var UglifyJsPlugin = webpackStream.webpack.optimize.UglifyJsPlugin;
 
 gulp.task('test', function () {
-  gulp.src('./spec/*-spec.js')
+  return gulp.src('./spec/*-spec.js')
     .pipe(webpackStream({ output: { filename: 'spec.js' } }))
     .pipe(jasmineBrowser.specRunner({ console: true }))
     .pipe(jasmineBrowser.headless());
 });
 
 gulp.task('build', function () {
-  gulp.src('./src/gdrive-appdata.js')
+  return gulp.src('./src/gdrive-appdata.js')
     .pipe(webpackStream({
       output: { filename: 'gdrive-appdata.js' },
       plugins: [new UglifyJsPlugin({ minimize: true })]

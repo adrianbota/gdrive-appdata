@@ -1,9 +1,9 @@
-describe('loadDriveAPI', function () {
+describe('Load Google Drive API', function () {
   var loadDriveAPI = require('../src/load-drive-api');
-  var lodashSet = require('lodash/set');
+  var gapiMock = require('./gapi-mock');
 
   beforeEach(function () {
-    lodashSet(window, 'gapi.client.load', jasmine.createSpy('load'));
+    this.deferreds = gapiMock();
   });
 
   describe('Calling loadDriveAPI with `version` arg', function () {

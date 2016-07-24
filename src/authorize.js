@@ -1,7 +1,7 @@
-module.exports = function authorize(clientId, scopes, immediate) {
+module.exports = function authorize(config) {
   return gapi.auth.authorize({
-    client_id: clientId,
-    scope: scopes.join(' '),
-    immediate: !!immediate
+    client_id: config.clientId,
+    scope: config.scopes.join('\x20'),
+    immediate: !!config.immediateAuth
   });
 };

@@ -1,14 +1,17 @@
-describe('authorize', function () {
+describe('Authorization for using Google API', function () {
   var authorize = require('../src/authorize');
-  var lodashSet = require('lodash/set');
+  var gapiMock = require('./gapi-mock');
 
   beforeEach(function () {
-    lodashSet(window, 'gapi.auth.authorize', jasmine.createSpy('authorize'));
+    this.deferreds = gapiMock();
   });
 
   describe('Calling authorize with `immediate` arg omitted', function () {
     beforeEach(function () {
-      authorize('foo', ['bar', 'baz']);
+      authorize({
+        clientId: 'foo',
+        scopes: ['bar', 'baz']
+      });
     });
 
     it('should call gapi.auth.authorize with the correct input', function () {
@@ -22,7 +25,11 @@ describe('authorize', function () {
 
   describe('Calling authorize with `immediate` arg set to true', function () {
     beforeEach(function () {
-      authorize('baz', ['bar'], true);
+      authorize({
+        clientId: 'baz',
+        scopes: ['bar'],
+        immediateAuth: true
+      });
     });
 
     it('should call gapi.auth.authorize with the correct input', function () {

@@ -1,13 +1,10 @@
-describe('retrieveAppDataFileId', function () {
-  var defer = require('deferred');
-  var lodashSet = require('lodash/set');
+describe('Retrieve app data file id', function () {
   var retrieveAppDataFileId = require('../src/retrieve-app-data-file-id');
+  var gapiMock = require('./gapi-mock');
 
   beforeEach(function () {
-    this.deferred = defer();
     this.handler = jasmine.createSpy('handler');
-    this.list = jasmine.createSpy('list').and.returnValue(this.deferred.promise);
-    lodashSet(window, 'gapi.client.drive.files.list', this.list);
+    this.deferreds = gapiMock();
   });
 
   describe('Calling retrieveAppDataFileId with a file name arg', function () {
@@ -16,7 +13,7 @@ describe('retrieveAppDataFileId', function () {
     });
 
     it('should call gapi.client.drive.files.list with the correct input', function () {
-      expect(this.list).toHaveBeenCalledWith({
+      expect(window.gapi.client.drive.files.list).toHaveBeenCalledWith({
         q: 'name="foo.json"',
         spaces: 'appDataFolder',
         fields: 'files(id)'
@@ -25,9 +22,8 @@ describe('retrieveAppDataFileId', function () {
 
     describe('when the app data file exists', function () {
       beforeEach(function () {
-        this.response = {};
-        lodashSet(this.response, 'result.files[0].id', 'foo');
-        this.deferred.resolve(this.response);
+        this.deferreds['gapi.client.drive.files.list']
+          .resolve({ result: { files: [{ id: 'foo' }] } });
       });
 
       it('should resolve with the file id', function () {
@@ -37,7 +33,7 @@ describe('retrieveAppDataFileId', function () {
 
     describe('when the app data file does not exist', function () {
       beforeEach(function () {
-        this.deferred.resolve({});
+        this.deferreds['gapi.client.drive.files.list'].resolve({});
       });
 
       it('should resolve with null', function () {
