@@ -1,8 +1,8 @@
 {
   "name": "gdrive-appdata",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Javascript utility to store application data to Google Drive app data folder",
-  "main": "gdrive-appdata.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -14,7 +14,10 @@
     "google",
     "drive",
     "app",
-    "data"
+    "data",
+    "load",
+    "save",
+    "store"
   ],
   "author": "Adrian Bota",
   "license": "MIT",
