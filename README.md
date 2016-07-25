@@ -3,7 +3,7 @@ Javascript utility to store application data to Google Drive app data folder.
 
 ## Including it in your app
 The distribution file is inside the `dist` folder.
-Including that file in your html file, will reveal a global variable named `GDriveAppData` which makes the config and API available.
+Including that file in your html file will expose a global variable named `GDriveAppData` which makes the config and API available.
 
 ## Configuration
 The default configuration looks like:
@@ -66,7 +66,7 @@ GDriveAppData.loadAppData().then(function (appData) {
 
 ### Saving app data
 ```
-GDriveAppData.loadAppData(appData);
+GDriveAppData.saveAppData(appData);
 ```
 
 `appData` must be a serializable object (`JSON.stringify` must not fail on it)
