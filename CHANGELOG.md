@@ -1,5 +1,3 @@
-### 0.0.0 (January 1, 2000)
+### 3.1.0 (October 25, 2016)
 
-* Foo
-* Bar
-* Baz
+* Added possibility to specify parent folder

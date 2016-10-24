@@ -2,8 +2,9 @@ var _get = require('lodash/get');
 var _assign = require('lodash/assign');
 var idxTpl = require('index-template');
 
-module.exports = function (file, clientId) {
+module.exports = function (file, clientId, folder) {
   var immediate = true;
+  folder = (folder || 'appDataFolder');
 
   var authorize = function () {
     return gapi.auth
@@ -26,7 +27,7 @@ module.exports = function (file, clientId) {
     return gapi.client.drive.files
       .create({
         fields: 'id',
-        resource: { name: file, parents: ['appDataFolder'] }
+        resource: { name: file, parents: [folder] }
       })
       .then(function (response) {
         return _get(response, 'result.id', null);
@@ -37,7 +38,7 @@ module.exports = function (file, clientId) {
     return gapi.client.drive.files
       .list({
         q: idxTpl('name="{0}"', file),
-        spaces: 'appDataFolder',
+        spaces: folder,
         fields: 'files(id)'
       })
       .then(function (response) {
