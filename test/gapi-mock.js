@@ -14,7 +14,7 @@ module.exports = function () {
     'gapi.client.request'
   ], function (request) {
     deferreds[request] = defer();
-    _set(window, request, jasmine.createSpy(request).and.returnValue(deferreds[request].promise));
+    _set(global, request, jasmine.createSpy(request).and.returnValue(deferreds[request].promise));
   });
 
   return {

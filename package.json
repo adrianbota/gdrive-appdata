@@ -4,7 +4,7 @@
   "description": "Javascript utility to store application data to Google Drive app data folder",
   "main": "src/js/main.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "istanbul cover jasmine"
   },
   "repository": {
     "type": "git",
@@ -26,22 +26,10 @@
   },
   "homepage": "https://github.com/adrianbota/gdrive-appdata#readme",
   "devDependencies": {
-    "autoprefixer": "^6.5.1",
-    "browser-sync": "^2.17.3",
-    "cssnano": "^3.7.7",
+    "abota-build": "^0.2.0",
     "deferred": "^0.7.5",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-file-include": "^1.0.0",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-imagemin": "^3.0.3",
-    "gulp-jasmine-browser": "^1.7.0",
-    "gulp-less": "^3.1.0",
-    "gulp-postcss": "^6.2.0",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "phantomjs-prebuilt": "^2.1.13",
-    "webpack-stream": "^3.2.0"
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.5.2"
   },
   "dependencies": {
     "index-template": "^1.0.1",

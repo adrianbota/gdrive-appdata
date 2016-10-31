@@ -13,7 +13,7 @@ describe('Google Drive App Data (gdad)', function () {
     });
 
     it('should authorize immediately with the correct config', function () {
-      expect(window.gapi.auth.authorize).toHaveBeenCalledWith({
+      expect(gapi.auth.authorize).toHaveBeenCalledWith({
         client_id: 'barId',
         scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata',
         immediate: true
@@ -34,7 +34,7 @@ describe('Google Drive App Data (gdad)', function () {
         });
 
         it('should authorize via popup', function () {
-          expect(window.gapi.auth.authorize).toHaveBeenCalledWith(
+          expect(gapi.auth.authorize).toHaveBeenCalledWith(
             jasmine.objectContaining({ immediate: false })
           );
         });
@@ -45,7 +45,7 @@ describe('Google Drive App Data (gdad)', function () {
           });
 
           it('should load drive api', function () {
-            expect(window.gapi.client.load).toHaveBeenCalledWith('drive', 'v3');
+            expect(gapi.client.load).toHaveBeenCalledWith('drive', 'v3');
           });
 
           describe('when drive api is loaded', function () {
@@ -54,7 +54,7 @@ describe('Google Drive App Data (gdad)', function () {
             });
 
             it('should get the file id', function () {
-              expect(window.gapi.client.drive.files.list).toHaveBeenCalledWith({
+              expect(gapi.client.drive.files.list).toHaveBeenCalledWith({
                 q: 'name="foo.json"',
                 spaces: 'appDataFolder',
                 fields: 'files(id)'
@@ -67,7 +67,7 @@ describe('Google Drive App Data (gdad)', function () {
               });
 
               it('should create it', function () {
-                expect(window.gapi.client.drive.files.create).toHaveBeenCalledWith({
+                expect(gapi.client.drive.files.create).toHaveBeenCalledWith({
                   fields: 'id',
                   resource: { name: 'foo.json', parents: ['appDataFolder'] }
                 });
@@ -79,7 +79,7 @@ describe('Google Drive App Data (gdad)', function () {
                 });
 
                 it('should read it', function () {
-                  expect(window.gapi.client.drive.files.get).toHaveBeenCalledWith({
+                  expect(gapi.client.drive.files.get).toHaveBeenCalledWith({
                     fileId: 'foo',
                     alt: 'media'
                   });
@@ -105,7 +105,7 @@ describe('Google Drive App Data (gdad)', function () {
               });
 
               it('should read it', function () {
-                expect(window.gapi.client.drive.files.get).toHaveBeenCalledWith({
+                expect(gapi.client.drive.files.get).toHaveBeenCalledWith({
                   fileId: 'foo',
                   alt: 'media'
                 });
@@ -120,7 +120,7 @@ describe('Google Drive App Data (gdad)', function () {
             });
 
             it('should again authorize immediately', function () {
-              expect(window.gapi.auth.authorize).toHaveBeenCalledWith(
+              expect(gapi.auth.authorize).toHaveBeenCalledWith(
                 jasmine.objectContaining({ immediate: true })
               );
             });
@@ -141,7 +141,7 @@ describe('Google Drive App Data (gdad)', function () {
     });
 
     it('should save data', function () {
-      expect(window.gapi.client.request).toHaveBeenCalledWith({
+      expect(gapi.client.request).toHaveBeenCalledWith({
         path: '/upload/drive/v3/files/foo',
         method: 'PATCH',
         params: { uploadType: 'media' },

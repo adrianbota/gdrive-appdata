@@ -1,5 +1,4 @@
 var _get = require('lodash/get');
-var _assign = require('lodash/assign');
 var idxTpl = require('index-template');
 
 module.exports = function (file, clientId) {
